@@ -3,6 +3,7 @@
 use App\Http\Controllers\CityControllers;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\vista;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+   // return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
@@ -30,6 +31,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
     Route::get('/info-city', [CityControllers::class, 'getContry'])->name('info-city');
+    Route::post('/guardar-city', [CityControllers::class, 'guardarCity'])->name('guardar-city');
+    Route::get('/dashboard', [CityControllers::class, 'dashboard'])->name('dashboard');
+    Route::post('/eliminar', [CityControllers::class, 'eliminar'])->name('eliminar');
+
+    
 });
 
 require __DIR__.'/auth.php';
